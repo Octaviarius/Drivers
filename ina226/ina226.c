@@ -93,7 +93,7 @@ int ina226_set_mode(ina226_handle_t* handle, ina226_configuration_mode_t mode)
 
 int ina226_set_shunt_resistance(ina226_handle_t* handle, float shunt_resistance)
 {
-    handle->curr_sens = shunt_resistance * SHUNT_VMAX / (float)(1UL << 15);
+    handle->curr_sens = SHUNT_VMAX / (float)(1UL << 15) / shunt_resistance;
     return 0;
 }
 
