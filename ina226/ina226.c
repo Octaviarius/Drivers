@@ -97,21 +97,6 @@ int ina226_set_shunt_resistance(ina226_handle_t* handle, float shunt_resistance)
     return 0;
 }
 
-int ina226_set_voltage_config(ina226_handle_t* handle, ina226_configuration_convert_time_t conv_time)
-{
-    int res = 0;
-
-    ina226_configuration_t conf;
-    res = ina226_get_configuration(handle, &conf);
-    CHECK_RESULT(res);
-
-    conf.shunt_conv_time = conv_time;
-    res = ina226_set_configuration(handle, conf);
-    CHECK_RESULT(res);
-
-    return res;
-}
-
 int ina226_get_limitations(ina226_handle_t* handle,
                            float* vbus_min,
                            float* vbus_max,
@@ -180,7 +165,7 @@ int ina226_get_mask(ina226_handle_t* handle, ina226_mask_t* value)
 
 int ina226_set_mask(ina226_handle_t* handle, ina226_mask_t value)
 {
-    return ina226_reg_read(handle, INA226_REG_MASK_ENABLE, (uint16_t*)&value);
+    return ina226_reg_write(handle, INA226_REG_MASK_ENABLE, *(uint16_t*)&value);
 }
 
 int ina226_get_chip_info(ina226_handle_t* handle, ina226_chip_info_t* value)
