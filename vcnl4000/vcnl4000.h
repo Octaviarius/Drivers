@@ -38,7 +38,7 @@ typedef int (*vcnl4000_write_t)(uint8_t reg, const void* data, uint8_t size);
 typedef struct
 {
     vcnl4000_read_t read;
-    vcnl4000_read_t write;
+    vcnl4000_write_t write;
 } vcnl4000_driver_t;
 
 /* ===== GLOBALS AND EXTERNS ================================================ */
